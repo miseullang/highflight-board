@@ -45,4 +45,8 @@ public class Member {
             this.memberNickName = memberNickName;
         }
     }
+
+    public void deleteMember() {
+        this.memberIsDelete = true;
+    }
 }

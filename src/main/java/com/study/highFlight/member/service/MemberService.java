@@ -1,5 +1,6 @@
 package com.study.highFlight.member.service;
 
+import com.study.highFlight.board.dto.DeletePostingResponseDTO;
 import com.study.highFlight.member.dto.*;
 
 public interface MemberService {
@@ -14,4 +15,7 @@ public interface MemberService {
 
     // 회원ID 조회
     MemberIdCheckResponseDTO memberInfo(String memberId);
+
+    // 회원 탈퇴
+    DeleteMemberResponseDTO deleteMember(Long memberNo);
 }

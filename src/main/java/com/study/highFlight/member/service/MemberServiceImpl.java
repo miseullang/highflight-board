@@ -89,4 +89,22 @@ public class MemberServiceImpl implements MemberService {
         return memberIdCheckResponseDTO;
     }
 
+    // 회원 탈퇴
+    @Override
+    public DeleteMemberResponseDTO deleteMember(Long memberNo) {
+        Member member = memberRepository.getReferenceById(memberNo);
+
+        DeleteMemberResponseDTO deleteMemberResponseDTO = new DeleteMemberResponseDTO();
+
+        if (member.getMemberIsDelete() == false) {
+            member.deleteMember();
+            deleteMemberResponseDTO.setMemberNo(memberNo);
+            deleteMemberResponseDTO.setMessage("탈퇴 처리되었습니다.");
+        } else {
+            deleteMemberResponseDTO.setMessage("이미 탈퇴된 회원입니다.");
+        }
+
+        return deleteMemberResponseDTO;
+    }
+
 }

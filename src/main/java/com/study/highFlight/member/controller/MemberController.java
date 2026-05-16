@@ -58,4 +58,13 @@ public class MemberController {
             return new ResponseEntity<>(memberIdCheckResponseDTO, HttpStatus.OK);
         }
     }
+
+    // 회원 탈퇴
+    @DeleteMapping("/{memberNo}")
+    public ResponseEntity<?> deleteMember(@PathVariable Long memberNo) {
+
+        DeleteMemberResponseDTO deleteMemberResponseDTO = memberService.deleteMember(memberNo);
+
+        return new ResponseEntity<>(deleteMemberResponseDTO, HttpStatus.OK);
+    }
 }
