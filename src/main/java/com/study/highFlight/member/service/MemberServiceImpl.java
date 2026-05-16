@@ -134,4 +134,8 @@ public class MemberServiceImpl implements MemberService {
         return searchMember;
     }
 
+    public Long add(Long firstNum, Long secondNum) {
+        return firstNum + secondNum;
+    }
+
 }
