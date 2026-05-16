@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @CrossOrigin("*")
@@ -54,5 +56,14 @@ public class BoardController {
         DeletePostingResponseDTO deletePostingResponseDTO = boardService.deletePosting(boardNo);
 
         return new ResponseEntity<>(deletePostingResponseDTO, HttpStatus.OK);
+    }
+
+    // 게시물 검색
+    @GetMapping("/search")
+    public ResponseEntity<?> searchPost(@RequestParam String keyword) {
+
+        List<SearchPostResponseDTO> searchPost = boardService.searchPost(keyword);
+
+        return new ResponseEntity<>(searchPost, HttpStatus.OK);
     }
 }

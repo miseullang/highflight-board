@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -86,5 +87,14 @@ public class BoardServiceImpl implements BoardService{
         deletePostingResponseDTO.setMessage("게시글이 삭제되었습니다.");
 
         return deletePostingResponseDTO;
+    }
+
+    @Override
+    public List<SearchPostResponseDTO> searchPost(String keyword) {
+
+        List<SearchPostResponseDTO> selectPostingByKeyword =
+                boardRepository.selectPostingByKeyword(keyword);
+
+        return selectPostingByKeyword;
     }
 }
