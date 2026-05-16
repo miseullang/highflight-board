@@ -1,5 +1,6 @@
 package com.study.highFlight.member.controller;
 
+import com.study.highFlight.board.dto.BoardSelectResponseDTO;
 import com.study.highFlight.member.dto.*;
 import com.study.highFlight.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,10 @@ public class MemberController {
 
         MemberIdCheckResponseDTO memberIdCheckResponseDTO = memberService.memberInfo(memberId);
 
-        return new ResponseEntity<>(memberIdCheckResponseDTO, HttpStatus.OK);
+        if (memberIdCheckResponseDTO == null) {
+            return new ResponseEntity<>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(memberIdCheckResponseDTO, HttpStatus.OK);
+        }
     }
 }
