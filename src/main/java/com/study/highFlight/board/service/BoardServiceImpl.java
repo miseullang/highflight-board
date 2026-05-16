@@ -74,4 +74,17 @@ public class BoardServiceImpl implements BoardService{
 
         return  updateBoardResponseDTO;
     }
+
+    @Override
+    public  DeletePostingResponseDTO deletePosting(Long boardNo) {
+        boardRepository.deletePosting(boardNo);
+
+        DeletePostingResponseDTO deletePostingResponseDTO = new DeletePostingResponseDTO();
+        deletePostingResponseDTO.setBoardNo(boardNo);
+
+
+        deletePostingResponseDTO.setMessage("게시글이 삭제되었습니다.");
+
+        return deletePostingResponseDTO;
+    }
 }

@@ -25,5 +25,13 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom {
                         .fetchFirst()
         );
     }
+
+    // 게시글 삭제
+    @Override
+    public void deletePosting(Long boardNo) {
+        jpaQueryFactory.delete(board)
+                .where(board.boardNo.eq(boardNo))
+                .execute();
+    }
 }
 

@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface BoardRepositoryCustom {
     Optional<Board> boardSelectInfo(Long boardNo);
+
+    void deletePosting(Long boardNo);
 }

@@ -33,7 +33,7 @@ public class BoardController {
         BoardSelectResponseDTO boardSelectInfo = boardService.boardSelectInfo(boardNo);
 
         if (boardSelectInfo == null) {
-            return new ResponseEntity<>("🚨 에러 🚨", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("🚨에러🚨", HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(boardSelectInfo, HttpStatus.OK);
         }
@@ -45,5 +45,14 @@ public class BoardController {
         UpdateBoardResponseDTO updateBoardResponseDTO = boardService.boardUpdate(updateBoardRequestDTO);
 
         return new ResponseEntity<>(updateBoardResponseDTO, HttpStatus.OK);
+    }
+
+    // 게시글 삭제
+    @DeleteMapping("/{boardNo}")
+    public ResponseEntity<?> deletePost(@PathVariable Long boardNo) {
+
+        DeletePostingResponseDTO deletePostingResponseDTO = boardService.deletePosting(boardNo);
+
+        return new ResponseEntity<>(deletePostingResponseDTO, HttpStatus.OK);
     }
 }

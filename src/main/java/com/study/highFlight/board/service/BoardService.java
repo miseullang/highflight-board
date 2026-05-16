@@ -11,4 +11,7 @@ public interface BoardService{
 
     // 게시글 수정
     UpdateBoardResponseDTO boardUpdate(UpdateBoardRequestDTO updateBoardRequestDTO);
+
+    // 게시글 삭제
+    DeletePostingResponseDTO deletePosting(Long boardNo);
 }
