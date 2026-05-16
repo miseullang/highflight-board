@@ -1,14 +1,19 @@
 package com.study.highFlight.member.service;
 
+import com.study.highFlight.common.config.exception.CustomException;
+import com.study.highFlight.common.config.exception.ErrorCode;
 import com.study.highFlight.member.dto.*;
 import com.study.highFlight.member.entity.Member;
 import com.study.highFlight.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -22,10 +27,26 @@ public class MemberServiceImpl implements MemberService {
     // 회원가입
     @Override
     public MemberSignUpResponseDTO signUp(MemberSignUpRequestDTO memberSignUpRequestDTO) {
+        String nickname = memberSignUpRequestDTO.getMemberNickname();
+        String mail = memberSignUpRequestDTO.getMemberMail();
+
+        if (nickname.isEmpty() || nickname.length() > 20) {
+            throw new CustomException(ErrorCode.OMG_ERROR);
+        }
+
+//        if (mail.includes("eunah")) {
+//            throw new CustomException(ErrorCode.OMG_ERROR_2);
+//        }
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        String password = memberSignUpRequestDTO.getMemberPw();
+        String encodePassword = passwordEncoder.encode(password);
+
         Member memberSign = memberRepository.save(
                 Member.builder()
                         .memberId(memberSignUpRequestDTO.getMemberId())
-                        .memberPw(memberSignUpRequestDTO.getMemberPw())
+                        .memberPw(encodePassword)
                         .memberMail(memberSignUpRequestDTO.getMemberMail())
                         .memberNickName(memberSignUpRequestDTO.getMemberNickname())
                         .memberIsDelete(false)
@@ -105,6 +126,12 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return deleteMemberResponseDTO;
+    }
+
+    @Override
+    public List<SearchMemberResponseDTO> searchMember(String memberId) {
+        List<SearchMemberResponseDTO> searchMember = memberRepository.searchMember(memberId);
+        return searchMember;
     }
 
 }

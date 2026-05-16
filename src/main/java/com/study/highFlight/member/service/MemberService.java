@@ -3,6 +3,8 @@ package com.study.highFlight.member.service;
 import com.study.highFlight.board.dto.DeletePostingResponseDTO;
 import com.study.highFlight.member.dto.*;
 
+import java.util.List;
+
 public interface MemberService {
     // 회원가입
     MemberSignUpResponseDTO signUp(MemberSignUpRequestDTO memberSignUpRequestDTO);
@@ -18,4 +20,7 @@ public interface MemberService {
 
     // 회원 탈퇴
     DeleteMemberResponseDTO deleteMember(Long memberNo);
+
+    // 회원 검색
+    List<SearchMemberResponseDTO> searchMember(String memberId);
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @CrossOrigin("*")
@@ -22,10 +24,17 @@ public class MemberController {
     // 회원 가입
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody MemberSignUpRequestDTO memberSignUpRequestDTO) {
+        // 기본 오류 처리
+//        try{
+//            MemberSignUpResponseDTO memberSignUpResponseDTO = memberService.signUp (memberSignUpRequestDTO);
+//            return new ResponseEntity<>(memberSignUpResponseDTO, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>("회원 가입 실패", HttpStatus.BAD_REQUEST);
+//        }
 
         MemberSignUpResponseDTO memberSignUpResponseDTO = memberService.signUp (memberSignUpRequestDTO);
-
         return new ResponseEntity<>(memberSignUpResponseDTO, HttpStatus.OK);
+
     }
 
     // 회원 조회
@@ -66,5 +75,14 @@ public class MemberController {
         DeleteMemberResponseDTO deleteMemberResponseDTO = memberService.deleteMember(memberNo);
 
         return new ResponseEntity<>(deleteMemberResponseDTO, HttpStatus.OK);
+    }
+
+    // 회원 검색
+    @GetMapping("/search")
+    public  ResponseEntity<?> searchMember(@RequestParam String memberId) {
+
+        List<SearchMemberResponseDTO> selectMemberById = memberService.searchMember(memberId);
+
+        return new ResponseEntity<>(selectMemberById, HttpStatus.OK);
     }
 }
