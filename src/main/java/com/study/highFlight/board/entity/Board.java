@@ -37,7 +37,7 @@ public class Board {
         this.boardReadCount++;
     }
 
-    public void changeBoardInfo(String boardTitle, String boardContent) {
+    public void changeBoardInfo(String boardTitle, String boardContent, LocalDateTime boardUpdate) {
         if (boardTitle != null) {
             this.boardTitle = boardTitle;
         }
@@ -45,5 +45,7 @@ public class Board {
         if (boardContent != null) {
             this.boardContent = boardContent;
         }
+
+        this.boardUpdate = boardUpdate;
     }
 }

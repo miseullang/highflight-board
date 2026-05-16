@@ -67,7 +67,7 @@ public class BoardServiceImpl implements BoardService{
     public UpdateBoardResponseDTO boardUpdate(UpdateBoardRequestDTO updateBoardRequestDTO) {
         Board board = boardRepository.getReferenceById(updateBoardRequestDTO.getBoardNo());
 
-        board.changeBoardInfo(updateBoardRequestDTO.getBoardTitle(), updateBoardRequestDTO.getBoardContent());
+        board.changeBoardInfo(updateBoardRequestDTO.getBoardTitle(), updateBoardRequestDTO.getBoardContent(), LocalDateTime.now());
 
         UpdateBoardResponseDTO updateBoardResponseDTO = new UpdateBoardResponseDTO();
         updateBoardResponseDTO.setMessage("게시물 수정 성공");
