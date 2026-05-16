@@ -61,6 +61,7 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    // 회원 수정
     @Override
     public UpdateMemberResponseDTO memberInfo(UpdateMemberRequestDTO updateMemberRequestDTO) {
         Member member = memberRepository.getReferenceById(updateMemberRequestDTO.getMemberNo());
@@ -73,5 +74,19 @@ public class MemberServiceImpl implements MemberService {
         return updateMemberResponseDTO;
     }
 
+    // 회원ID 조회
+    @Override
+    public MemberIdCheckResponseDTO memberInfo(String memberId) {
+        Optional<Member> requestMemberId = memberRepository.requestMemberId(memberId);
+
+        MemberIdCheckResponseDTO memberIdCheckResponseDTO = new MemberIdCheckResponseDTO();
+
+        if (requestMemberId.isEmpty()){
+            memberIdCheckResponseDTO.setMessage("사용 가능한 아이디입니다.");
+        } else {
+            memberIdCheckResponseDTO.setMessage("이미 사용중인 아이디입니다.");
+        }
+        return memberIdCheckResponseDTO;
+    }
 
 }

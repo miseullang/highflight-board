@@ -12,4 +12,6 @@ public interface MemberService {
     // 회원수정
     UpdateMemberResponseDTO memberInfo(UpdateMemberRequestDTO updateMemberRequestDTO);
 
+    // 회원ID 조회
+    MemberIdCheckResponseDTO memberInfo(String memberId);
 }

@@ -23,4 +23,14 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                         .fetchFirst()
         );
     }
+
+    @Override
+    public Optional<Member> requestMemberId(String memberId) {
+        return Optional.ofNullable(
+                jpaQueryFactory.select(member)
+                        .from(member)
+                        .where(member.memberId.eq(memberId))
+                        .fetchFirst()
+        );
+    }
 }

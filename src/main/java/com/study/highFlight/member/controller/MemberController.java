@@ -44,4 +44,13 @@ public class MemberController {
 
         return new ResponseEntity<>(updateMemberResponseDTO, HttpStatus.OK);
     }
+
+    // 회원 ID 중복 검사
+    @GetMapping("/id-check")
+    public ResponseEntity<?> getMember(@RequestParam String memberId) {
+
+        MemberIdCheckResponseDTO memberIdCheckResponseDTO = memberService.memberInfo(memberId);
+
+        return new ResponseEntity<>(memberIdCheckResponseDTO, HttpStatus.OK);
+    }
 }

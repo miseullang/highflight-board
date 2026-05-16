@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface MemberRepositoryCustom {
     Optional<Member> selectMemberInfo(Long memberNo);
+    Optional<Member> requestMemberId(String memberId);
 }
